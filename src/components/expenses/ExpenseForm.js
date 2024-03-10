@@ -37,7 +37,7 @@ const Expenses = () => {
       dispatch(expenseAction.addDesc(description));
       dispatch(expenseAction.addCategory(selectedCategory));
       fetch(
-        `https://https://expense-tracker-eaba7-default-rtdb.firebaseio.com/userExpenses${userEmail}/${expenseId}.json`,
+        `https://expense-tracker-eaba7-default-rtdb.firebaseio.com/userExpenses${userEmail}/${expenseId}.json`,
         {
           method: "PUT",
           body: JSON.stringify(expenseData),
@@ -121,7 +121,7 @@ const Expenses = () => {
             setCsv(arr);
             setExpenses(arr);
             localStorage.setItem("allExpense", JSON.stringify(arr));
-            dispatch(expenseAction.addExpenses(expenses));
+            dispatch(expenseAction.addExpenses(arr));
           });
         } else {
           response.json().then((data) => {
@@ -136,11 +136,11 @@ const Expenses = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [dispatch, userEmail, expenses]);
+  }, [dispatch, userEmail]);
 
   useEffect(() => {
     fetchExpenses();
-  }, []);
+  }, [fetchExpenses]);
 
   const editHandler = (id) => {
     let editExpense = expenses.filter((expense) => {
